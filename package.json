@@ -19,7 +19,8 @@
   "homepage": "https://github.com/chtushar/certificate-generator#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "pdf-creator-node": "^1.4.1"
+    "hbs": "^4.1.1",
+    "puppeteer": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

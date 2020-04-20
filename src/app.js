@@ -1,16 +1,29 @@
 const path = require('path');
 const fs = require('fs');
-const express = require("express");
-const app = express();
-
-const port = process.env.PORT || 3000;
+const puppeteer = require('puppeteer');
 
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-})
+(async function() {
+    try{
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
 
-app.listen(port, () => {
-    console.log(`Server is up on port ${port}.`);
-});
-  
+        await page.setContent('<h1>Hello</h1>');
+        await page.emulateMedia('screen');
+        await page.pdf({
+            path: 'src/pdf/mypdf.pdf',
+            format: 'A4',
+            printBackground: true
+        })
+
+
+
+        
+        console.log("done");
+        await browser.close();
+        process.exit();
+    }
+    catch(e){
+        console.log(e);
+    }
+})();
