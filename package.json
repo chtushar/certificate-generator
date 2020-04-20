@@ -1,0 +1,27 @@
+{
+  "name": "certificate-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chtushar/certificate-generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chtushar/certificate-generator/issues"
+  },
+  "homepage": "https://github.com/chtushar/certificate-generator#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pdf-creator-node": "^1.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
