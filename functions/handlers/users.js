@@ -13,3 +13,26 @@ exports.getAllUsers = (req, res) => {
     })
     .catch(err => console.log(err))
 }
+
+exports.getOneUser = (req, res) => {
+    db
+    .collection('users')
+    .where('email', '==', req.query.email)
+    .get()
+    .then((snap) => {
+        
+        let user=[]
+
+        if (snap.empty) {
+            return res.json({erro: 'No Such Documents.'})
+        }
+
+        snap.forEach(doc => {
+            user.push(doc.data())
+        })        
+        
+        return res.json(user[0])
+
+    })
+    .catch(err => console.log(err))
+}
