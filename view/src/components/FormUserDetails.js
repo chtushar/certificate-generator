@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react';
 import {Box ,AppBar, TextField, Button, Container,Typography, Toolbar} from '@material-ui/core'
-import {makeStyles, ThemeProvider} from '@material-ui/core/styles' 
+
 
 
 
@@ -38,6 +38,7 @@ const FormUserDetails = ({nextStep, handleChange, email}) => {
                         <br/>
                         <Button
                         style={styles.button}
+                        onClick={next}
                         >
                             Get Certificate
                         </Button>
@@ -53,7 +54,7 @@ const FormUserDetails = ({nextStep, handleChange, email}) => {
 
 const styles = {
     appbar: {
-        backgroundColor: "transparent",
+        backgroundColor: "#ffffff",
         color: "#000000"
     },
     button: {
