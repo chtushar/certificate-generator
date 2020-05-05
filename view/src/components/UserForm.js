@@ -17,7 +17,7 @@ function UserForm(){
     
     //Handle Inputs
     const [email, setEmail] = useState('');
-    const handleChange = input => e =>{
+    const handleChange = e =>{
         setEmail(e.target.value)
     }
 
