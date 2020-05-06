@@ -28,7 +28,7 @@ const FormUserDetails = ({nextStep, handleChange, email}) => {
 
                 
                 <Container maxWidth="sm" style={styles.container}>
-                    <form style={styles.form}>
+                    <form style={styles.form} onSubmit={next}>
                     <TextField
                         label="Email"
                         placeholder="Enter your email.."
@@ -63,7 +63,7 @@ const styles = {
         color: "#fff"
     },
     container: {
-        height: '100vh',
+        height: '90vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

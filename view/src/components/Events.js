@@ -1,37 +1,58 @@
-import React, {Fragment} from 'react';
-import {Box ,AppBar, TextField, Button, Container,Typography, Toolbar} from '@material-ui/core'
+import React, {Fragment, Component} from 'react';
+import {Box ,AppBar, Container,Typography, Toolbar} from '@material-ui/core'
+import axios from 'axios'
 
-const Events = ({email}) => {
-    return (
-    <Fragment>
-        <AppBar style={styles.appbar}>
-                    <Toolbar>
-                        <Typography variant="h6">
-                            GDG Nagpur | Certificate Portal
-                        </Typography>
-                    </Toolbar>
-        </AppBar>
-        <Box>
+class Events extends Component {
+    constructor(props){
+        
+        super(props);
+        let {email} = props;
+        this.state = {
+            email,
+            events: []
+        }
+    }
 
+
+    componentDidMount(){
+        let emailQuery=encodeURIComponent(this.state.email)
+        axios.get(`https://us-central1-certificate-generator-69a8b.cloudfunctions.net/api/findone?email=${emailQuery}`)
+            .then((data) => {
+                this.setState({events: data.data.events})
+
+            })
+            .catch((err) => console.log(err))
+    }
+
+    render() { 
+        return ( 
+                <Fragment>
+                    <AppBar style={styles.appbar}>
+                                <Toolbar>
+                                    <Typography variant="h6">
+                                        GDG Nagpur | Certificate Portal
+                                    </Typography>
+                                </Toolbar>
+                    </AppBar>
+                    <Box>
+            
+                            
+                            <Container maxWidth="sm" style={styles.container}>
+                                <div style={styles.eventsList}>
+                                    {this.state.events.map(e => {
+                                        return(<li key={e}>{e}</li>)
+                                    })}
+                                </div>
+                            </Container>
+            
+                            </Box>
+                </Fragment>
                 
-                <Container maxWidth="sm" style={styles.container}>
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                    {email}
-                </Container>
-
-                </Box>
-    </Fragment>
-    );
+         );
+    }
 }
+ 
+
  
 const styles = {
     appbar: {
@@ -44,14 +65,14 @@ const styles = {
         color: "#fff"
     },
     container: {
-        height: '100vh',
+        height: '90vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     },
-    form: {
-        height: '50%',
+    eventsList: {
+        minHeight: '50%',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
