@@ -1,5 +1,5 @@
 import React, {Fragment, Component} from 'react';
-import {Box ,AppBar, Container,Typography, Toolbar} from '@material-ui/core'
+import {Box ,AppBar, Container,Typography, Toolbar, Paper, List, ListItem} from '@material-ui/core'
 import axios from 'axios'
 
 class Events extends Component {
@@ -9,7 +9,8 @@ class Events extends Component {
         let {email} = props;
         this.state = {
             email,
-            events: []
+            events: [],
+            name: ''
         }
     }
 
@@ -18,7 +19,7 @@ class Events extends Component {
         let emailQuery=encodeURIComponent(this.state.email)
         axios.get(`https://us-central1-certificate-generator-69a8b.cloudfunctions.net/api/findone?email=${emailQuery}`)
             .then((data) => {
-                this.setState({events: data.data.events})
+                this.setState({events: data.data.events, name: `${data.data.firstName} ${data.data.lastName}`})
 
             })
             .catch((err) => console.log(err))
@@ -38,11 +39,27 @@ class Events extends Component {
             
                             
                             <Container maxWidth="sm" style={styles.container}>
-                                <div style={styles.eventsList}>
-                                    {this.state.events.map(e => {
-                                        return(<li key={e}>{e}</li>)
-                                    })}
-                                </div>
+                                <Paper
+                                    style={styles.card}
+                                    elevation={2}
+                                >
+                                    <div>
+                                    <Typography color="textSecondary" gutterBottom style={styles.name}>
+                                        {this.state.name}
+                                    </Typography>
+                                    </div>
+                                    <div style={styles.eventsList}>
+                                        <List>
+                                                {this.state.events.map(e => {
+                                                    return(<ListItem button key={e} style={styles.listItem}>
+                                                        <Typography style={styles.listItem}>
+                                                            {e}
+                                                        </Typography>
+                                                        </ListItem>)
+                                                })}
+                                        </List>
+                                    </div>
+                                </Paper>
                             </Container>
             
                             </Box>
@@ -52,7 +69,7 @@ class Events extends Component {
     }
 }
  
-
+//example@example.com
  
 const styles = {
     appbar: {
@@ -72,14 +89,23 @@ const styles = {
         alignItems: 'center'
     },
     eventsList: {
-        minHeight: '50%',
-        width: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '20px',
-        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    },
+    card: {
+        height: '50%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+    },
+    listItem: {
+        textAlign: 'center'
+    },
+    name: {
+        padding: '16px'
     }
 }
 

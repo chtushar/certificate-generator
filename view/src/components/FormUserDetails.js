@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Box ,AppBar, TextField, Button, Container,Typography, Toolbar} from '@material-ui/core'
+import {Box ,AppBar, TextField, Button, Container,Typography, Toolbar, Paper} from '@material-ui/core'
 
 
 
@@ -28,21 +28,26 @@ const FormUserDetails = ({nextStep, handleChange, email}) => {
 
                 
                 <Container maxWidth="sm" style={styles.container}>
-                    <form style={styles.form} onSubmit={next}>
-                    <TextField
-                        label="Email"
-                        placeholder="Enter your email.."
-                        onChange={handleChange}
-                        defaultValue={email}
-                        />
-                        <br/>
-                        <Button
-                        style={styles.button}
-                        onClick={next}
-                        >
-                            Get Certificate
-                        </Button>
-                    </form>
+                    <Paper
+                        style={styles.card}
+                        elevation={2}
+                    >
+                        <form onSubmit={next} style={styles.form}>
+                        <TextField
+                            label="Email"
+                            placeholder="Enter your email.."
+                            onChange={handleChange}
+                            defaultValue={email}
+                            />
+                            <br/>
+                            <Button
+                            style={styles.button}
+                            onClick={next}
+                            >
+                                Get Certificate
+                            </Button>
+                        </form>
+                    </Paper>
                 </Container>
 
                 </Box>
@@ -69,16 +74,21 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    form: {
+    card: {
         height: '50%',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '20px',
-        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)'
+    },
+    form:{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
+
 }
 
 
