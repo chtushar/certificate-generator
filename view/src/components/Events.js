@@ -34,7 +34,6 @@ class Events extends Component {
         axios.get(`https://us-central1-certificate-generator-69a8b.cloudfunctions.net/api/findone?email=${emailQuery}`)
             .then((data) => {
                 this.setState({events: data.data.events, name: `${data.data.firstName} ${data.data.lastName}`})
-
             })
             .catch((err) => console.log(err))
     }
