@@ -1,6 +1,20 @@
 import React, {Fragment, Component} from 'react';
 import {Box ,AppBar, Container,Typography, Toolbar, Paper, List, ListItem} from '@material-ui/core'
 import axios from 'axios'
+import {v4 as uuid} from 'uuid'
+import { PDFDownloadLink} from '@react-pdf/renderer'
+import Certificate from './template/Certificate'
+
+
+
+
+
+
+
+
+
+
+
 
 class Events extends Component {
     constructor(props){
@@ -51,11 +65,14 @@ class Events extends Component {
                                     <div style={styles.eventsList}>
                                         <List>
                                                 {this.state.events.map(e => {
-                                                    return(<ListItem button key={e} style={styles.listItem}>
-                                                        <Typography style={styles.listItem}>
-                                                            {e}
-                                                        </Typography>
-                                                        </ListItem>)
+
+                                                    return(<ListItem button key={uuid()} style={styles.listItem}>
+                                                            <PDFDownloadLink document={<Certificate />} fileName="somename.pdf">
+                                                                <Typography >
+                                                                    {e}
+                                                                </Typography>
+                                                            </PDFDownloadLink>
+                                                            </ListItem>)
                                                 })}
                                         </List>
                                     </div>
